@@ -1,0 +1,35 @@
+{
+  "name": "ai-assessment-creator-backend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "worker": "tsx watch src/workers/generationWorker.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "start:worker": "node dist/workers/generationWorker.js"
+  },
+  "dependencies": {
+    "bullmq": "^5.64.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "google-auth-library": "^10.5.0",
+    "groq-sdk": "^1.2.0",
+    "ioredis": "^5.8.2",
+    "jsonrepair": "^3.14.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.0.1",
+    "socket.io": "^4.8.1",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.12.3",
+    "tsx": "^4.21.0",
+    "typescript": "~6.0.2"
+  }
+}

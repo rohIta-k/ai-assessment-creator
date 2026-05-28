@@ -1,0 +1,63 @@
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: 320px;
+    background: linear-gradient(180deg, #eeeeee 0%, #dadada 100%);
+    font-family:
+      "Bricolage Grotesque",
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(180deg, #eeeeee 0%, #dadada 100%);
+    font-family:
+      "Bricolage Grotesque",
+      ui-sans-serif,
+      system-ui,
+      sans-serif;
+    /* Global Bricolage typography defaults */
+    line-height: 1.4; /* 140% */
+    letter-spacing: -0.04em;
+  }
+
+  :root {
+    --color-primary: #303030;
+    --color-muted-55: rgba(94,94,94,0.55);
+    --color-muted-80: rgba(94,94,94,0.8);
+    --color-muted-90: rgba(94,94,94,0.9);
+  }
+
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer utilities {
+  .text-primary { color: var(--color-primary); }
+  .text-muted { color: var(--color-muted-55); }
+  .text-muted-80 { color: var(--color-muted-80); }
+  .text-muted-90 { color: var(--color-muted-90); }
+  .scrollbar-soft {
+    scrollbar-width: thin;
+    scrollbar-color: #bdbdbd transparent;
+  }
+}
