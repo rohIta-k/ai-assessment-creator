@@ -121,6 +121,10 @@ function countMarks(questionTypes: QuestionTypeInput[]) {
   return questionTypes.reduce((sum, questionType) => sum + questionType.questions * questionType.marks, 0)
 }
 
+function isNumericalQuestionType(label: string) {
+  return /\bnumerical\b|\bcalculation\b|\bquantitative\b|\bmath(s|ematics)?\b|\bproblems?\b/i.test(label)
+}
+
 function buildGeneratedPaper(
   assignment: HydratedDocument<AssignmentDocument>,
   parsedResponse: GeneratedAssignmentResponse,
@@ -133,6 +137,22 @@ function buildGeneratedPaper(
     const correspondingType = questionTypes[sectionIndex]
     const sectionQuestions = section.questions.map((question) => {
       const questionTypeLabel = correspondingType?.label ?? question.question
+      const visual = question.visual && !isNumericalQuestionType(questionTypeLabel) && (question.visual.points?.length ?? 0) > 0
+        ? {
+          renderer: question.visual.renderer,
+          chartType: question.visual.chartType,
+          title: question.visual.title,
+          xAxisLabel: question.visual.xAxisLabel,
+          yAxisLabel: question.visual.yAxisLabel,
+          points: question.visual.points?.map((point) => ({
+            x: point.x,
+            y: point.y,
+          })),
+          expression: question.visual.expression,
+          domain: question.visual.domain,
+        }
+        : undefined
+
       const structuredQuestion = {
         id: nextQuestionId,
         text: question.question,
@@ -145,21 +165,7 @@ function buildGeneratedPaper(
         type: questionTypeLabel,
         options: question.options,
         answer: question.answer,
-        visual: question.visual
-          ? {
-            renderer: question.visual.renderer,
-            chartType: question.visual.chartType,
-            title: question.visual.title,
-            xAxisLabel: question.visual.xAxisLabel,
-            yAxisLabel: question.visual.yAxisLabel,
-            points: question.visual.points?.map((point) => ({
-              x: point.x,
-              y: point.y,
-            })),
-            expression: question.visual.expression,
-            domain: question.visual.domain,
-          }
-          : undefined,
+        visual,
       }
 
       nextQuestionId += 1

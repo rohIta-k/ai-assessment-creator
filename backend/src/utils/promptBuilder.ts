@@ -185,9 +185,15 @@ IMPORTANT RULES:
 
 10. Avoid repetitive or low-quality questions.
 
-11. Include conceptual, analytical, reasoning-based, and application-oriented questions wherever appropriate.
+11. Keep every question directly grounded in the title, uploaded source material, and the requested section label.
 
-12. MCQ questions MUST:
+12. Do NOT invent unrelated facts, topics, names, formulas, or examples that are not supported by the source material or the stated topic.
+
+13. If the uploaded material is limited, reuse the same syllabus-aligned concepts in different ways instead of drifting into random or off-topic content.
+
+14. Include conceptual, analytical, reasoning-based, and application-oriented questions wherever appropriate.
+
+15. MCQ questions MUST:
 * include exactly 4 options
 * include plausible distractors
 * have only one correct answer
@@ -196,7 +202,7 @@ IMPORTANT RULES:
 * be slightly tricky and academically meaningful
 * include scenario-based or application-based questions whenever appropriate
 
-13. Numerical questions MUST:
+16. Numerical questions MUST:
 * involve calculations, derivations, formulas, or quantitative reasoning
 * require proper multi-step solving where appropriate
 * include realistic numerical values
@@ -204,8 +210,12 @@ IMPORTANT RULES:
 * test conceptual understanding behind the calculation
 * include word problems or real-world applications whenever appropriate
 * provide concise but correct final answers
+* NEVER require graphs, charts, diagrams, plots, flowcharts, circuits, or visual interpretation
+* NEVER include a visual object
+* NEVER include renderer, chartType, points, expression, domain, xAxisLabel, yAxisLabel, or any other visual metadata
+* be completely solvable using mathematical reasoning and calculations alone
 
-14. Short answer questions MUST:
+17. Short answer questions MUST:
 * test conceptual clarity and understanding
 * avoid one-word or definition-only responses
 * encourage explanation, comparison, reasoning, or interpretation
@@ -214,15 +224,14 @@ IMPORTANT RULES:
 * keep answers concise, text-based, and academically relevant
 * avoid excessively lengthy descriptive answers
 
-15. Diagram or graph-based questions MUST:
+18. Diagram or graph-based questions MUST:
 * ask students to analyze, interpret, label, explain, or infer information
 * reference diagrams, charts, graphs, circuits, flowcharts, or visual structures when relevant
 * encourage observational and analytical thinking
 * include practical or real-world interpretation where appropriate
 * clearly describe the required diagram or graph in text form if an actual image cannot be generated
-* include a visual object for any question that needs a chart, graph, or diagram, using renderer: "recharts" for plotted data and renderer: "desmos" for signal/function graphs
+* include a visual object for any question that needs a chart, graph, or diagram, using renderer: "recharts" for plotted data and graphs
 * for recharts, provide chartType, points, and axis labels when possible
-* for desmos, provide a Desmos-compatible expression and a numeric domain
 * require concise text-only answers that can typically be written within 4 to 5 lines
 * avoid requiring large paragraph-style explanations
 * For graph or visual metadata:
@@ -236,11 +245,18 @@ IMPORTANT RULES:
 * visual.domain must always be:
    [number, number]
 
-7. Never include symbols, operators, or textual math inside numeric arrays.
+19. Visual Generation Rules:
+* Only Diagram/Graph-Based questions may contain a visual object.
+* MCQ questions MUST NOT contain a visual object unless explicitly requested.
+* Numerical questions MUST NOT contain a visual object.
+* Short answer questions MUST NOT contain a visual object.
+* If a question is not diagram/graph-based, omit the visual field entirely.
 
-16. Questions should maximize topic coverage breadth before repeating similar conceptual areas.
+20. Never include symbols, operators, or textual math inside numeric arrays.
 
-17. Hard and medium questions should increasingly focus on:
+21. Questions should maximize topic coverage breadth before repeating similar conceptual areas.
+
+22. Hard and medium questions should increasingly focus on:
 * applied reasoning
 * tradeoffs
 * architecture understanding
@@ -316,7 +332,7 @@ REQUIRED JSON SCHEMA:
           "marks": number,
           "answer": "string",
           "visual": {
-            "renderer": "recharts | desmos",
+            "renderer": "recharts",
             "chartType": "line | bar | scatter",
             "title": "string",
             "xAxisLabel": "string",

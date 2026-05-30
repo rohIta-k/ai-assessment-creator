@@ -1,6 +1,6 @@
-# ai-assessment-creator
+# AI-assessment-creator
 
-ai-assessment-creator is a small web app that uses AI to generate printable assessment papers from a short prompt and optional uploaded material. It provides a guided create flow, live generation progress, a review/preview screen with graph support, and PDF-style export.
+AI-assessment-creator is a small web app that uses AI to generate printable assessment papers from a short prompt and optional uploaded material. It provides a guided create flow, live generation progress, a review/preview screen with graph support, and PDF-style export.
 
 Detailed features
 -----------------

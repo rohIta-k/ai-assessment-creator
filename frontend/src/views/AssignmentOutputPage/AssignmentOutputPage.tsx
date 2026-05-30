@@ -236,6 +236,13 @@ export function AssignmentOutputPage() {
         store.resetGenerationState()
         setMinimumLoadingElapsed(false)
         router.push('/output?state=loading')
+
+        await new Promise<void>((resolve) => {
+            window.requestAnimationFrame(() => {
+                window.requestAnimationFrame(() => resolve())
+            })
+        })
+
         try {
             const response = await generateAssignment(token, {
                 ...regeneratePayload,

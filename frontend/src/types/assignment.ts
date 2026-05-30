@@ -31,7 +31,7 @@ export interface GeneratedQuestion {
   marks: number
 }
 
-export type QuestionVisualRenderer = 'recharts' | 'desmos'
+export type QuestionVisualRenderer = 'recharts'
 export type QuestionVisualChartType = 'line' | 'bar' | 'scatter'
 
 export interface QuestionVisualPoint {

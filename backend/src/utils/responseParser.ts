@@ -8,7 +8,7 @@ export const generatedQuestionSchema = z.object({
   answer: z.string().trim().min(1),
   options: z.array(z.string().trim().min(1)).optional(),
   visual: z.object({
-    renderer: z.enum(['recharts', 'desmos']),
+    renderer: z.literal('recharts'),
     chartType: z.enum(['line', 'bar', 'scatter']).optional(),
     title: z.string().trim().default(''),
     xAxisLabel: z.string().trim().default(''),
@@ -56,9 +56,7 @@ function normalizeQuestion(question: unknown) {
 
       return {
         ...visualCandidate,
-        renderer: typeof visualCandidate.renderer === 'string'
-          ? visualCandidate.renderer.trim().toLowerCase()
-          : visualCandidate.renderer,
+        renderer: 'recharts',
         chartType: typeof visualCandidate.chartType === 'string'
           ? visualCandidate.chartType.trim().toLowerCase()
           : visualCandidate.chartType,

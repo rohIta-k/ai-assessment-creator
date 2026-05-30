@@ -27,22 +27,8 @@ export function normalizeGraphPoints(visual: GeneratedQuestionVisual) {
     }))
 }
 
-export function normalizeDesmosExpression(expression: string, chartType?: GeneratedQuestionVisual['chartType']) {
-    const cleaned = expression.trim()
-
-    if (!cleaned) {
-        return ''
-    }
-
-    if (cleaned.includes('=')) {
-        return cleaned
-    }
-
-    if (chartType === 'scatter') {
-        return cleaned
-    }
-
-    return `y = ${cleaned}`
+export function hasRenderableGraph(visual: GeneratedQuestionVisual) {
+    return (visual.points?.length ?? 0) > 0
 }
 
 export function deriveGraphBounds(visual: GeneratedQuestionVisual) {
@@ -74,21 +60,16 @@ export function deriveGraphBounds(visual: GeneratedQuestionVisual) {
 }
 
 export function buildStaticGraphHtml(visual: GeneratedQuestionVisual) {
+    if (!hasRenderableGraph(visual)) {
+        return ''
+    }
+
     const points = normalizeGraphPoints(visual)
     const width = 720
     const height = 240
     const padding = { top: 26, right: 24, bottom: 42, left: 52 }
     const innerWidth = width - padding.left - padding.right
     const innerHeight = height - padding.top - padding.bottom
-
-    if (points.length === 0) {
-        return `
-            <div style="padding:18px;border:1px solid #dedede;border-radius:12px;background:#fff;">
-                <div style="font-weight:700;margin-bottom:8px;">${escapeHtml(visual.title || 'Graph')}</div>
-                <div style="color:#555;font-size:13px;">${escapeHtml(visual.expression || 'Graph data is not available.')}</div>
-            </div>
-        `
-    }
 
     const xValues = points.map((point) => point.x)
     const yValues = points.map((point) => point.y)
@@ -144,7 +125,7 @@ export function buildStaticGraphHtml(visual: GeneratedQuestionVisual) {
 }
 
 export function buildQuestionPaperPages(items: ReviewFlatItem[], mode: ReviewMode) {
-    const MAX_PAGE_HEIGHT = 560
+    const MAX_PAGE_HEIGHT = 620
 
     const estimateQuestionHeight = (item: ReviewFlatItem) => {
         let height = 90
@@ -153,8 +134,8 @@ export function buildQuestionPaperPages(items: ReviewFlatItem[], mode: ReviewMod
             height += 90
         }
 
-        if (item.question.visual) {
-            height += item.question.visual.renderer === 'desmos' ? 220 : 190
+        if (item.question.visual && hasRenderableGraph(item.question.visual)) {
+            height += 190
         }
 
         if (mode === 'answers') {
