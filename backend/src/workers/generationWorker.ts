@@ -6,7 +6,6 @@ import { generateQuestionPaper } from '../services/aiGenerationService.js'
 import { publishUserSocketEvent } from '../sockets/socketEvents.js'
 
 async function startWorker() {
-  await connectDatabase()
 
   const worker = new Worker<GenerationJob>(
     'assignment-generation',

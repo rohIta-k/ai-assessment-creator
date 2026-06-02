@@ -7,15 +7,16 @@ import { initializeSocketServer } from './sockets/socketServer.js'
 async function bootstrap() {
   await connectDatabase()
 
-  await import('./workers/generationWorker.js')
-  console.log('[backend] generation worker bootstrapped')
-
   const server = createServer(app)
   initializeSocketServer(server)
 
   server.listen(env.PORT, () => {
-    console.log(`Backend listening on http://localhost:${env.PORT}`)
+    console.log(`Backend listening on port ${env.PORT}`)
   })
+
+  import('./workers/generationWorker.js')
+    .then(() => console.log('Worker started'))
+    .catch(console.error)
 }
 
 bootstrap().catch((error) => {
